@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 1px solid green;
+}
+
+#header {
+  background-color: #f8f8f8;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#sidebar {
+  background-color: #f0f0f0;
+  width: 25%;
+  padding: 1rem;
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+}
+
+#main-body {
+  flex-grow: 1;
+  padding: 1rem;
+}
+
+.container {
+  display: flex;
+  flex-grow: 1;
+}
