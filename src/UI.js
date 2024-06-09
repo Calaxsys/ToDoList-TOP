@@ -1,9 +1,9 @@
-import { projects, Project, handleProjectFormSubmit } from "./projects";
+import { projects, handleProjectFormSubmit } from "./projects";
 
 function initialLoad() {
-  const sidebarNavElementsDisplay = document.querySelector("#nav");
-  sidebarNavElementsDisplay.innerHTML = ""; // Clear existing content
-  sidebarNavElementsDisplay.innerHTML = `        
+  const sidebarNavDisplay = document.querySelector("#nav");
+  sidebarNavDisplay.innerHTML = ""; // Clear existing content
+  sidebarNavDisplay.innerHTML = `        
       <h1 id="home-tab">Home</h1>
       <h3 id="inbox-tab">Inbox</h3>
       <h3 id="today-tab">Today</h3>
@@ -24,25 +24,29 @@ function initialLoad() {
       </div>
   `;
 
-  //Event Listener for opening the form to add a project
-  document.getElementById("add-project-btn").addEventListener("click", () => {
-    document.getElementById("project-form-popup").style.display = "block";
-    document.getElementById("project-name").focus();
-  });
-
-  //Event listeners for form submission and cancellation
+  // Event listeners for adding a project and form submission/cancellation
+  document
+    .getElementById("add-project-btn")
+    .addEventListener("click", openProjectForm);
   document
     .getElementById("project-form")
     .addEventListener("submit", handleProjectFormSubmit);
+  document
+    .getElementById("cancel")
+    .addEventListener("cancel", cancelProjectForm);
 
-  document.getElementById("cancel").addEventListener("click", () => {
-    document.getElementById("project-form-popup").style.display = "none";
-    //Clear text input field on cancel
-    document.getElementById("project-name").value = "";
-  });
-
-  //Display projects from localStorage
+  //Display projects from local storage
   displayProjectsFromStorage(projects);
+}
+
+function openProjectForm() {
+  document.getElementById("project-form-popup").style.display = "block";
+  document.getElementById("project-name").focus();
+}
+
+function cancelProjectForm() {
+  document.getElementById("project-form-popup").style.display = "none";
+  document.getElementById("project-name").value = ""; // Clear input field
 }
 
 function displayProjectsFromStorage(projects) {
