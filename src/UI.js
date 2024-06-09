@@ -11,7 +11,7 @@ function initialLoad() {
       <div id="projects-section">
         <h2>Projects</h2>
         <div id="projects-list"></div>
-        <button id="add-project">Add Project</button>
+        <button id="add-project-btn">Add Project</button>
       </div>
   `;
 }
