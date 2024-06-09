@@ -1,4 +1,4 @@
-import { projects, Project } from "./projects";
+import { projects, Project, handleProjectFormSubmit } from "./projects";
 
 function initialLoad() {
   const sidebarNavElementsDisplay = document.querySelector("#nav");
@@ -10,7 +10,7 @@ function initialLoad() {
       <h3 id="important-tab">Important</h3>
       <div id="projects-section">
         <h2>Projects</h2>
-        <div id="projects-list"></div>
+        <ul id="projects-list"></ul>
         <button id="add-project-btn">Add Project</button>
       </div>
       <!-- Popup Form -->
@@ -27,6 +27,7 @@ function initialLoad() {
   //Event Listener for opening the form to add a project
   document.getElementById("add-project-btn").addEventListener("click", () => {
     document.getElementById("project-form-popup").style.display = "block";
+    document.getElementById("project-name").focus();
   });
 
   //Event listeners for form submission and cancellation
@@ -39,18 +40,22 @@ function initialLoad() {
     //Clear text input field on cancel
     document.getElementById("project-name").value = "";
   });
+
+  //Display projects from localStorage
+  displayProjectsFromStorage(projects);
 }
 
-function handleProjectFormSubmit(e) {
-  e.preventDefault();
-  const projectNameInput = document.getElementById("project-name");
-  const projectName = projectNameInput.value.trim();
-  if (projectName) {
-    const project = new Project(projectName);
+function displayProjectsFromStorage(projects) {
+  projects.forEach((project) => {
     displayProject(project);
-    projectNameInput.value = "";
-    document.getElementById("project-form-popup").style.display = "none";
-  }
+  });
+}
+
+function displayProject(project) {
+  const projectsListDisplay = document.getElementById("projects-list");
+  const createProjectDisplayElement = document.createElement("li");
+  createProjectDisplayElement.textContent = project.name;
+  projectsListDisplay.appendChild(createProjectDisplayElement);
 }
 
 export { initialLoad };
