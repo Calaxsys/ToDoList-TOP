@@ -13,12 +13,26 @@ function initialLoad() {
         <ul id="projects-list"></ul>
         <button id="add-project-btn">Add Project</button>
       </div>
-      <!-- Popup Form -->
+    `;
+
+  const formDisplays = document.querySelector("#main-body");
+  formDisplays.innerHTML = `
+      <!-- Project Popup Form -->
       <div id="project-form-popup" class="popup">
         <form id="project-form" class="popup-content">
           <label for="project-name">Title:</label>
           <input type="text" id="project-name" name="project-name" required>
           <button type="submit">Add Project</button>
+          <button type="button" id="cancel">Cancel</button>
+        </form>
+      </div>
+
+      <!-- Task Popup Form --> 
+      <div id="task-form-popup" class="popup">
+        <form id="task-form" class="popup-content">
+          <label for"task-name">Title:</label>
+          <input type="text" id="task-name" name="task-name" required>
+          <button type="submit">Add Task</button>
           <button type="button" id="cancel">Cancel</button>
         </form>
       </div>
@@ -33,7 +47,7 @@ function initialLoad() {
     .addEventListener("submit", handleProjectFormSubmit);
   document
     .getElementById("cancel")
-    .addEventListener("cancel", cancelProjectForm);
+    .addEventListener("click", cancelProjectForm);
 
   //Display projects from local storage
   displayProjectsFromStorage(projects);
