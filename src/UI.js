@@ -1,4 +1,5 @@
 import { projects, handleProjectFormSubmit } from "./projects";
+import { openTaskForm, cancelTaskForm } from "./tasks";
 
 function initialLoad() {
   const sidebarNavDisplay = document.querySelector("#nav");
@@ -23,7 +24,7 @@ function initialLoad() {
           <label for="project-name">Title:</label>
           <input type="text" id="project-name" name="project-name" required>
           <button type="submit">Add Project</button>
-          <button type="button" id="cancel">Cancel</button>
+          <button type="button" id="cancel-project">Cancel</button>
         </form>
       </div>
 
@@ -33,22 +34,39 @@ function initialLoad() {
           <label for"task-name">Title:</label>
           <input type="text" id="task-name" name="task-name" required>
           <button type="submit">Add Task</button>
-          <button type="button" id="cancel">Cancel</button>
+          <button type="button" id="cancel-task">Cancel</button>
         </form>
       </div>
   `;
 
   // Event listeners for adding a project and form submission/cancellation
-  document
-    .getElementById("add-project-btn")
-    .addEventListener("click", openProjectForm);
+  document.getElementById("add-project-btn").addEventListener("click", () => {
+    if ((document.getElementById("task-form-popup").style.display = "block")) {
+      cancelTaskForm();
+    }
+    openProjectForm();
+  });
+
   document
     .getElementById("project-form")
     .addEventListener("submit", handleProjectFormSubmit);
   document
-    .getElementById("cancel")
+    .getElementById("cancel-project")
     .addEventListener("click", cancelProjectForm);
 
+  //Event listeners for adding a task and form submission/cancellation
+  document.getElementById("add-task-btn").addEventListener("click", () => {
+    if (
+      (document.getElementById("project-form-popup").style.display = "block")
+    ) {
+      cancelProjectForm();
+    }
+    openTaskForm();
+  });
+
+  document
+    .getElementById("cancel-task")
+    .addEventListener("click", cancelTaskForm);
   //Display projects from local storage
   displayProjectsFromStorage(projects);
 }
