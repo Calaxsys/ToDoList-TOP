@@ -58,4 +58,4 @@ function displayProject(project) {
   projectsListDisplay.appendChild(createProjectDisplayElement);
 }
 
-export { initialLoad };
+export { initialLoad, displayProject };

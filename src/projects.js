@@ -1,4 +1,5 @@
 import { getProjects, saveProjects } from "./localStorage";
+import { displayProject } from "./UI";
 
 let projects = getProjects();
 
