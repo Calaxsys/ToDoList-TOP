@@ -1,5 +1,5 @@
 import { getProjects, saveProjects } from "./localStorage";
-import { displayProject } from "./UI";
+import { populateProjectsList } from "./UI";
 
 let projects = getProjects();
 
@@ -24,15 +24,15 @@ function handleProjectFormSubmit(e) {
   const projectNameInput = document.getElementById("project-name");
   const projectName = projectNameInput.value.trim();
   if (projectName) {
-    const project = new Project(projectName);
-    project.id = Date.now().toString();
-    project.name = projectName;
-    displayProject(project);
+    const project = new Project(Date.now().toString(), projectName, []);
+
+    //push project to array
+    projects.push(project);
 
     //Save to local storage
-    const projects = getProjects();
-    projects.push(project);
     saveProjects(projects);
+
+    populateProjectsList();
 
     //Reset and close the form
     projectNameInput.value = "";

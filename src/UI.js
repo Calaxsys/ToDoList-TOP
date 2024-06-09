@@ -1,5 +1,6 @@
 import { projects, handleProjectFormSubmit } from "./projects";
 import { openTaskForm, cancelTaskForm } from "./tasks";
+import { selectProject } from "./selectProject";
 
 function initialLoad() {
   const sidebarNavDisplay = document.querySelector("#nav");
@@ -39,6 +40,42 @@ function initialLoad() {
       </div>
   `;
 
+  populateProjectsList();
+  setupEventListeners();
+}
+
+function openProjectForm() {
+  document.getElementById("project-form-popup").style.display = "block";
+  document.getElementById("project-name").focus(); //Auto focus on the title when opening form
+}
+
+function cancelProjectForm() {
+  document.getElementById("project-form-popup").style.display = "none";
+  document.getElementById("project-name").value = ""; // Clear input field
+}
+
+function displayProjectsFromStorage(projects) {
+  projects.forEach((project) => {
+    populateProjectsList(project);
+  });
+}
+
+function populateProjectsList() {
+  const projectsList = document.getElementById("projects-list");
+  projectsList.innerHTML = ""; // Clear existing projects
+
+  projects.forEach((project) => {
+    const createProjectItem = document.createElement("li");
+    createProjectItem.textContent = project.name;
+    createProjectItem.dataset.projectId = project.id;
+    createProjectItem.addEventListener("click", () => {
+      selectProject(project.id);
+    });
+    projectsList.appendChild(createProjectItem);
+  });
+}
+
+function setupEventListeners() {
   // Event listeners for adding a project and form submission/cancellation
   document.getElementById("add-project-btn").addEventListener("click", () => {
     if ((document.getElementById("task-form-popup").style.display = "block")) {
@@ -67,31 +104,9 @@ function initialLoad() {
   document
     .getElementById("cancel-task")
     .addEventListener("click", cancelTaskForm);
+
   //Display projects from local storage
   displayProjectsFromStorage(projects);
 }
 
-function openProjectForm() {
-  document.getElementById("project-form-popup").style.display = "block";
-  document.getElementById("project-name").focus();
-}
-
-function cancelProjectForm() {
-  document.getElementById("project-form-popup").style.display = "none";
-  document.getElementById("project-name").value = ""; // Clear input field
-}
-
-function displayProjectsFromStorage(projects) {
-  projects.forEach((project) => {
-    displayProject(project);
-  });
-}
-
-function displayProject(project) {
-  const projectsListDisplay = document.getElementById("projects-list");
-  const createProjectDisplayElement = document.createElement("li");
-  createProjectDisplayElement.textContent = project.name;
-  projectsListDisplay.appendChild(createProjectDisplayElement);
-}
-
-export { initialLoad, displayProject };
+export { initialLoad, populateProjectsList };
