@@ -1,7 +1,7 @@
 import { projects } from "./projects";
 import { handleProjectFormSubmit } from "./formSubmittals";
 import { openTaskForm, cancelTaskForm } from "./tasks";
-import { selectProject, selectedProjectId } from "./selectProject";
+import { selectProject } from "./selectProject";
 
 function initialLoad() {
   const sidebarNavDisplay = document.querySelector("#nav");

@@ -1,5 +1,8 @@
-import { Project } from "./projects";
+import { Project, projects } from "./projects";
+import { selectedProjectId } from "./selectProject";
 import { Task } from "./tasks";
+import { saveProjects } from "./localStorage";
+import { populateProjectsList } from "./UI";
 
 function handleProjectFormSubmit(e) {
   e.preventDefault();
