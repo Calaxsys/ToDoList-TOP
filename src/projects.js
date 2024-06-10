@@ -1,5 +1,4 @@
-import { getProjects, saveProjects } from "./localStorage";
-import { populateProjectsList } from "./UI";
+import { getProjects } from "./localStorage";
 
 let projects = getProjects();
 
@@ -19,25 +18,4 @@ class Project {
   }
 }
 
-function handleProjectFormSubmit(e) {
-  e.preventDefault();
-  const projectNameInput = document.getElementById("project-name");
-  const projectName = projectNameInput.value.trim();
-  if (projectName) {
-    const project = new Project(Date.now().toString(), projectName, []);
-
-    //push project to array
-    projects.push(project);
-
-    //Save to local storage
-    saveProjects(projects);
-
-    populateProjectsList();
-
-    //Reset and close the form
-    projectNameInput.value = "";
-    document.getElementById("project-form-popup").style.display = "none";
-  }
-}
-
-export { projects, Project, handleProjectFormSubmit };
+export { projects, Project };
