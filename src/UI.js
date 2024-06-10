@@ -1,4 +1,4 @@
-import { projects } from "./projects";
+import { projects, Project } from "./projects";
 import { handleProjectFormSubmit } from "./formSubmittals";
 import { openTaskForm, cancelTaskForm } from "./tasks";
 import { selectProject, selectedProjectId } from "./selectProject";
@@ -20,6 +20,7 @@ function initialLoad() {
 
   const formDisplays = document.querySelector("#main-body");
   formDisplays.innerHTML = `
+      <ul id="task-display"></ul>
       <!-- Project Popup Form -->
       <div id="project-form-popup" class="popup">
         <form id="project-form" class="popup-content">
@@ -42,6 +43,7 @@ function initialLoad() {
   `;
 
   populateProjectsList();
+  populateTasksList();
   setupEventListeners();
 }
 
