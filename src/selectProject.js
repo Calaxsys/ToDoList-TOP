@@ -15,4 +15,4 @@ function selectProject(projectId) {
   selectedProjectId = projectId;
 }
 
-export { selectProject };
+export { selectedProjectId, selectProject };
