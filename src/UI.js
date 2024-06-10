@@ -1,7 +1,7 @@
 import { projects } from "./projects";
 import { handleProjectFormSubmit } from "./formSubmittals";
 import { openTaskForm, cancelTaskForm } from "./tasks";
-import { selectProject } from "./selectProject";
+import { selectProject, selectedProjectId } from "./selectProject";
 
 function initialLoad() {
   const sidebarNavDisplay = document.querySelector("#nav");
@@ -70,7 +70,7 @@ function populateProjectsList() {
   });
 }
 
-function displayTasks(selectedProjectId) {
+function populateTasksList(selectedProjectId) {
   const project = selectedProjectId;
   const taskList = document.getElementById("task-display");
   taskList.innerHTML = "";
@@ -114,6 +114,7 @@ function setupEventListeners() {
 
   //Display projects from local storage
   populateProjectsList();
+  populateTasksList(selectedProjectId);
 }
 
 export { initialLoad, populateProjectsList };
