@@ -1,5 +1,5 @@
 import { Project, projects } from "./projects";
-import { selectedProjectId } from "./selectProject";
+import { getSelectedProjectId } from "./selectProject";
 import { Task } from "./tasks";
 import { saveProjects } from "./localStorage";
 import { populateProjectsList } from "./UI";
@@ -30,19 +30,18 @@ function handleTaskFormSubmit(e) {
   const taskNameInput = document.getElementById("task-name");
   const taskName = taskNameInput.value.trim();
   if (taskName) {
-    const task = new Task(taskName);
-    task.name = taskName;
+    const selectedProjectId = getSelectedProjectId();
+    if (selectedProjectId) {
+      const project = projects.find((proj) => proj.id === selectedProjectId);
+      if (project) {
+        const task = new Task(taskName);
+        task.title = taskName;
+        project.tasks.push(task);
 
-    //Find the currently selected project object to push the task to
-    const selectedProject = projects.find(
-      (project) => project.id === selectedProjectId
-    );
-    if (selectedProject) {
-      selectedProject.addTask(task);
-
-      saveProjects(projects);
+        //Save to local storage
+        saveProjects(projects);
+      }
     }
-
     //Clear and close the form popup
     taskNameInput.value = "";
     document.getElementById("task-form-popup").style.display = "none";

@@ -1,7 +1,10 @@
-import { projects, Project } from "./projects";
-import { handleProjectFormSubmit } from "./formSubmittals";
+import { projects, openProjectForm, cancelProjectForm } from "./projects";
+import {
+  handleProjectFormSubmit,
+  handleTaskFormSubmit,
+} from "./formSubmittals";
 import { openTaskForm, cancelTaskForm } from "./tasks";
-import { selectProject, selectedProjectId } from "./selectProject";
+import { selectProject } from "./selectProject";
 
 function initialLoad() {
   const sidebarNavDisplay = document.querySelector("#nav");
@@ -20,7 +23,10 @@ function initialLoad() {
 
   const formDisplays = document.querySelector("#main-body");
   formDisplays.innerHTML = `
+      <h2 data-task-title-element></h2>
       <ul id="task-display"></ul>
+
+      
       <!-- Project Popup Form -->
       <div id="project-form-popup" class="popup">
         <form id="project-form" class="popup-content">
@@ -41,20 +47,7 @@ function initialLoad() {
         </form>
       </div>
   `;
-
-  populateProjectsList();
-  populateTasksList();
   setupEventListeners();
-}
-
-function openProjectForm() {
-  document.getElementById("project-form-popup").style.display = "block";
-  document.getElementById("project-name").focus(); //Auto focus on the title when opening form
-}
-
-function cancelProjectForm() {
-  document.getElementById("project-form-popup").style.display = "none";
-  document.getElementById("project-name").value = ""; // Clear input field
 }
 
 function populateProjectsList() {
@@ -69,18 +62,6 @@ function populateProjectsList() {
       selectProject(project.id);
     });
     projectsList.appendChild(createProjectItem);
-  });
-}
-
-function populateTasksList(selectedProjectId) {
-  const project = selectedProjectId;
-  const taskList = document.getElementById("task-display");
-  taskList.innerHTML = "";
-
-  project.getTasks().forEach((task) => {
-    const taskItem = document.createElement("li");
-    taskItem.textContent = task.title;
-    taskList.appendChild(taskItem);
   });
 }
 
@@ -114,9 +95,12 @@ function setupEventListeners() {
     .getElementById("cancel-task")
     .addEventListener("click", cancelTaskForm);
 
+  document
+    .getElementById("task-form")
+    .addEventListener("submit", handleTaskFormSubmit);
+
   //Display projects from local storage
   populateProjectsList();
-  populateTasksList(selectedProjectId);
 }
 
 export { initialLoad, populateProjectsList };

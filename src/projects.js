@@ -18,4 +18,15 @@ class Project {
   }
 }
 
-export { projects, Project };
+function openProjectForm() {
+  document.getElementById("project-form-popup").style.display = "block";
+  document.getElementById("project-name").focus(); //Auto focus on the title when opening form
+}
+
+function cancelProjectForm() {
+  document.getElementById("project-form-popup").style.display = "none";
+  document.getElementById("project-name").value = ""; // Clear input field
+}
+
+console.log(projects);
+export { projects, Project, openProjectForm, cancelProjectForm };
