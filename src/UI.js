@@ -17,17 +17,18 @@ function initialLoad() {
         <li id="important-tab">Important</li>
       </div>
       <div id="projects-section">
-        <h2>Projects</h2>
+        <h1>Projects</h1>
         <ul id="projects-list"></ul>
-        <button id="add-project-btn">Add Project</button>
       </div>
+      <button id="add-project-btn">Add Project</button>
     `;
 
   const formDisplays = document.querySelector("#main-body");
   formDisplays.innerHTML = `
-      <h2 data-task-title-element></h2>
+  <div id="task-container">
+      <h2 data-task-title-element id="task-title"></h2>
       <ul id="task-display"></ul>
-
+  </div>
       
       <!-- Project Popup Form -->
       <div id="project-form-popup" class="popup">
@@ -42,10 +43,28 @@ function initialLoad() {
       <!-- Task Popup Form --> 
       <div id="task-form-popup" class="popup">
         <form id="task-form" class="popup-content">
-          <label for"task-name">Title:</label>
+          <label for="task-name">Title:</label>
           <input type="text" id="task-name" name="task-name" required>
-          <button type="submit">Add Task</button>
-          <button type="button" id="cancel-task">Cancel</button>
+
+          <label for="task-description">Description:</label>
+          <input type="text" id="task-description">
+
+          <label for"due-date">Due Date:</label>
+          <input type="date" id="due-date">
+
+          <span>Priority Level:</span>
+          <div id="priority-container">
+            <input type="radio" id="high-priority" name="priority-level" value="high-priority">
+            <label for="high-priority">High</label>
+
+            <input type="radio" id="standard-priority" name="priority-level" value="standard-priority">
+            <label for="standard-priority">Standard</label>
+
+            <input type="radio" id="low-priority" name="priority-level" value="low-priority">
+            <label for="low-priority">Low</label>
+          </div>
+            <button type="submit">Add Task</button>
+            <button type="button" id="cancel-task">Cancel</button>
         </form>
       </div>
   `;
@@ -81,6 +100,7 @@ function populateTasksDisplay() {
       taskTitleDisplay.textContent = project.name;
       project.tasks.forEach((task) => {
         const taskElement = document.createElement("div");
+        taskElement.classList.add("task-card");
         taskElement.innerText = task.title;
         taskDisplay.appendChild(taskElement);
       });
