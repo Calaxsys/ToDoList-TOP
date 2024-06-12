@@ -2,7 +2,7 @@ import { Project, projects } from "./projects";
 import { getSelectedProjectId } from "./selectProject";
 import { Task } from "./tasks";
 import { saveProjects } from "./localStorage";
-import { populateProjectsList } from "./UI";
+import { populateProjectsList, populateTasksDisplay } from "./UI";
 
 function handleProjectFormSubmit(e) {
   e.preventDefault();
@@ -40,6 +40,8 @@ function handleTaskFormSubmit(e) {
 
         //Save to local storage
         saveProjects(projects);
+
+        populateTasksDisplay();
       }
     }
     //Clear and close the form popup

@@ -4,7 +4,7 @@ import {
   handleTaskFormSubmit,
 } from "./formSubmittals";
 import { openTaskForm, cancelTaskForm } from "./tasks";
-import { selectProject } from "./selectProject";
+import { selectProject, getSelectedProjectId } from "./selectProject";
 
 function initialLoad() {
   const sidebarNavDisplay = document.querySelector("#nav");
@@ -65,6 +65,23 @@ function populateProjectsList() {
   });
 }
 
+function populateTasksDisplay() {
+  const taskDisplay = document.getElementById("task-display");
+  taskDisplay.innerHTML = "";
+
+  const selectedProjectId = getSelectedProjectId();
+  if (selectedProjectId) {
+    const project = projects.find((proj) => proj.id === selectedProjectId);
+    if (project) {
+      project.tasks.forEach((task) => {
+        const taskElement = document.createElement("div");
+        taskElement.innerText = task.title;
+        taskDisplay.appendChild(taskElement);
+      });
+    }
+  }
+}
+
 function setupEventListeners() {
   // Event listeners for adding a project and form submission/cancellation
   document.getElementById("add-project-btn").addEventListener("click", () => {
@@ -103,4 +120,4 @@ function setupEventListeners() {
   populateProjectsList();
 }
 
-export { initialLoad, populateProjectsList };
+export { initialLoad, populateProjectsList, populateTasksDisplay };

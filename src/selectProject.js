@@ -1,3 +1,4 @@
+import { populateTasksDisplay } from "./UI";
 let selectedProjectId = null;
 
 function selectProject(projectId) {
@@ -13,6 +14,7 @@ function selectProject(projectId) {
     selectedProject.classList.add("selected-project");
   }
   selectedProjectId = projectId;
+  populateTasksDisplay();
 }
 
 function getSelectedProjectId() {
