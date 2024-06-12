@@ -9,11 +9,13 @@ import { selectProject, getSelectedProjectId } from "./selectProject";
 function initialLoad() {
   const sidebarNavDisplay = document.querySelector("#nav");
   sidebarNavDisplay.innerHTML = ""; // Clear existing content
-  sidebarNavDisplay.innerHTML = `        
-      <h1 id="home-tab">Home</h1>
-      <h3 id="inbox-tab">Inbox</h3>
-      <h3 id="today-tab">Today</h3>
-      <h3 id="important-tab">Important</h3>
+  sidebarNavDisplay.innerHTML = `  
+      <div id="default-projects">
+        <h1 id="home-tab">Home</h1>
+        <li id="inbox-tab">Inbox</li>
+        <li id="today-tab">Today</li>
+        <li id="important-tab">Important</li>
+      </div>
       <div id="projects-section">
         <h2>Projects</h2>
         <ul id="projects-list"></ul>
@@ -66,6 +68,9 @@ function populateProjectsList() {
 }
 
 function populateTasksDisplay() {
+  const taskTitleDisplay = document.querySelector("[data-task-title-element]");
+  taskTitleDisplay.innerHTML = "";
+
   const taskDisplay = document.getElementById("task-display");
   taskDisplay.innerHTML = "";
 
@@ -73,6 +78,7 @@ function populateTasksDisplay() {
   if (selectedProjectId) {
     const project = projects.find((proj) => proj.id === selectedProjectId);
     if (project) {
+      taskTitleDisplay.textContent = project.name;
       project.tasks.forEach((task) => {
         const taskElement = document.createElement("div");
         taskElement.innerText = task.title;
