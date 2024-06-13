@@ -77,6 +77,18 @@ li {
   margin: 1rem 0 1rem;
   padding: 0.7rem;
   font-size: 20px;
+  display: flex;
+}
+
+.task-card-left {
+  display: flex;
+  gap: 1rem;
+}
+
+.task-card-left > input[type="radio"] {
+  width: 18px;
+  height: 100%;
+  vertical-align: middle;
 }
 
 /* ID Selectors */

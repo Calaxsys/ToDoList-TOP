@@ -101,7 +101,21 @@ function populateTasksDisplay() {
       project.tasks.forEach((task) => {
         const taskElement = document.createElement("div");
         taskElement.classList.add("task-card");
-        taskElement.innerText = task.title;
+
+        const taskCardLeftDisplay = document.createElement("div");
+        taskCardLeftDisplay.classList.add("task-card-left");
+
+        const toggleComplete = document.createElement("input");
+        toggleComplete.type = "radio";
+
+        const taskTitle = document.createElement("h3");
+        taskTitle.innerText = task.title;
+
+        // const priorityDisplay = document.createElement('span');
+
+        taskCardLeftDisplay.appendChild(toggleComplete);
+        taskCardLeftDisplay.appendChild(taskTitle);
+        taskElement.appendChild(taskCardLeftDisplay);
         taskDisplay.appendChild(taskElement);
       });
     }
