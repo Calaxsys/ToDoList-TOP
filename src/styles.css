@@ -36,8 +36,9 @@ li {
   display: none;
   position: fixed;
   left: 50%;
+  top: 25%;
   background-color: white;
-  border: 1px solid black;
+  border: 2px solid black;
   padding: 1.5rem;
   z-index: 1000;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -89,6 +90,16 @@ li {
   width: 18px;
   height: 100%;
   vertical-align: middle;
+  cursor: pointer;
+}
+
+.popup-btns {
+  margin: 0.4rem;
+}
+
+.popup-btns:hover {
+  background-color: grey;
+  color: white;
 }
 
 /* ID Selectors */
@@ -173,6 +184,22 @@ li {
 #priority-container {
   display: flex;
   justify-content: space-evenly;
+  gap: 0.6rem;
+  margin: 0.3rem;
+  font-size: 1.3rem;
+}
+
+#priority-container > label:hover {
+  cursor: pointer;
+  color: #1a7fb9;
+  /* font-size: 1.4rem; */
+  transition: 0.3s;
+}
+
+#priority-container > input[type="radio"] {
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
 }
 
 #task-container {

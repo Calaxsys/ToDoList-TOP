@@ -59,12 +59,12 @@ function initialLoad() {
 
             <input type="radio" id="standard-priority" name="priority-level" value="standard-priority">
             <label for="standard-priority">Standard</label>
-
+        
             <input type="radio" id="low-priority" name="priority-level" value="low-priority">
             <label for="low-priority">Low</label>
           </div>
-            <button type="submit">Add Task</button>
-            <button type="button" id="cancel-task">Cancel</button>
+            <button type="submit" class="popup-btns">Add Task</button>
+            <button type="button" id="cancel-task" class="popup-btns">Cancel</button>
         </form>
       </div>
   `;
