@@ -5,6 +5,7 @@ import {
 } from "./formSubmittals";
 import { openTaskForm, cancelTaskForm } from "./tasks";
 import { selectProject, getSelectedProjectId } from "./selectProject";
+import { deleteTask } from "./deleteTask";
 
 function initialLoad() {
   const sidebarNavDisplay = document.querySelector("#nav");
@@ -98,7 +99,7 @@ function populateTasksDisplay() {
     const project = projects.find((proj) => proj.id === selectedProjectId);
     if (project) {
       taskTitleDisplay.textContent = project.name;
-      project.tasks.forEach((task) => {
+      project.tasks.forEach((task, index) => {
         const taskElement = document.createElement("div");
         taskElement.classList.add("task-card");
 
@@ -132,6 +133,9 @@ function populateTasksDisplay() {
 
         deleteTaskBtn.textContent = "Delete";
         deleteTaskBtn.id = "delete-task-btn";
+        deleteTaskBtn.addEventListener("click", () =>
+          deleteTask(selectedProjectId, index)
+        );
 
         rightCardDisplay.appendChild(dueDateElement);
         rightCardDisplay.appendChild(priorityDisplay);
@@ -179,10 +183,6 @@ function setupEventListeners() {
     .getElementById("task-form")
     .addEventListener("submit", handleTaskFormSubmit);
 
-  //Event listeners for tasks
-  document
-    .getElementById("delete-task-btn")
-    .addEventListener("click", deleteTask);
   //Display projects from local storage
   populateProjectsList();
 }
