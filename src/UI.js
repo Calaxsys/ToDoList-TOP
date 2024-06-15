@@ -1,9 +1,4 @@
-import {
-  defaultProjects,
-  projects,
-  openProjectForm,
-  cancelProjectForm,
-} from "./projects";
+import { projects, openProjectForm, cancelProjectForm } from "./projects";
 
 import {
   handleProjectFormSubmit,
@@ -18,10 +13,6 @@ function initialLoad() {
   const sidebarNavDisplay = document.querySelector("#nav");
   sidebarNavDisplay.innerHTML = ""; // Clear existing content
   sidebarNavDisplay.innerHTML = `  
-      <div id="default-projects">
-        <h1 id="home-tab">Home</h1>
-        <ul id="default-projects-list"></ul>
-      </div>
       <div id="projects-section">
         <h1>Projects</h1>
         <ul id="projects-list"></ul>
@@ -75,21 +66,6 @@ function initialLoad() {
       </div>
   `;
   setupEventListeners();
-}
-
-function populateDefaultProjectsList() {
-  const defaultProjectsList = document.getElementById("default-projects-list");
-  defaultProjectsList.innerHTML = "";
-
-  defaultProjects.forEach((project) => {
-    const createProjectItem = document.createElement("li");
-    createProjectItem.textContent = project.name;
-    createProjectItem.dataset.projectId = project.id;
-    createProjectItem.addEventListener("click", () => {
-      selectProject(project.id);
-    });
-    defaultProjectsList.appendChild(createProjectItem);
-  });
 }
 
 function populateProjectsList() {
@@ -205,12 +181,6 @@ function setupEventListeners() {
 
   //Display projects from local storage
   populateProjectsList();
-  populateDefaultProjectsList();
 }
 
-export {
-  initialLoad,
-  populateProjectsList,
-  populateDefaultProjectsList,
-  populateTasksDisplay,
-};
+export { initialLoad, populateProjectsList, populateTasksDisplay };
