@@ -79,6 +79,7 @@ li {
   padding: 0.7rem;
   font-size: 20px;
   display: flex;
+  justify-content: space-between;
 }
 
 .task-card-left {
@@ -86,11 +87,20 @@ li {
   gap: 1rem;
 }
 
+.task-card-left > h3 {
+  align-self: center;
+}
+
 .task-card-left > input[type="checkbox"] {
   width: 18px;
   height: 100%;
   vertical-align: middle;
   cursor: pointer;
+}
+
+.task-card-right {
+  display: flex;
+  flex-direction: column;
 }
 
 .popup-btns {
@@ -115,7 +125,7 @@ li {
 #sidebar {
   background-color: #0c4a6e;
   color: #e0f2fe;
-  width: 15%;
+  width: 20%;
   padding: 1rem;
   box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
 }
@@ -145,7 +155,6 @@ li {
 }
 
 #projects-section {
-  margin-top: 3rem;
   display: flex;
   flex-direction: column;
 }
