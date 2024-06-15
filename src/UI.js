@@ -126,8 +126,12 @@ function populateTasksDisplay() {
 
         dueDateElement.textContent = task.date;
         priorityDisplay.textContent = task.priority;
+
         editTaskBtn.textContent = "Edit Task";
+        editTaskBtn.id = "edit-task-btn";
+
         deleteTaskBtn.textContent = "Delete";
+        deleteTaskBtn.id = "delete-task-btn";
 
         rightCardDisplay.appendChild(dueDateElement);
         rightCardDisplay.appendChild(priorityDisplay);
@@ -175,6 +179,10 @@ function setupEventListeners() {
     .getElementById("task-form")
     .addEventListener("submit", handleTaskFormSubmit);
 
+  //Event listeners for tasks
+  document
+    .getElementById("delete-task-btn")
+    .addEventListener("click", deleteTask);
   //Display projects from local storage
   populateProjectsList();
 }
