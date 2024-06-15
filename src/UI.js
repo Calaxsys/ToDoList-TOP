@@ -1,8 +1,15 @@
-import { projects, openProjectForm, cancelProjectForm } from "./projects";
+import {
+  defaultProjects,
+  projects,
+  openProjectForm,
+  cancelProjectForm,
+} from "./projects";
+
 import {
   handleProjectFormSubmit,
   handleTaskFormSubmit,
 } from "./formSubmittals";
+
 import { openTaskForm, cancelTaskForm } from "./tasks";
 import { selectProject, getSelectedProjectId } from "./selectProject";
 import { deleteTask } from "./deleteTask";
@@ -13,9 +20,7 @@ function initialLoad() {
   sidebarNavDisplay.innerHTML = `  
       <div id="default-projects">
         <h1 id="home-tab">Home</h1>
-        <li id="inbox-tab">Inbox</li>
-        <li id="today-tab">Today</li>
-        <li id="week-tab">This Week</li>
+        <ul id="default-projects-list"></ul>
       </div>
       <div id="projects-section">
         <h1>Projects</h1>
@@ -70,6 +75,21 @@ function initialLoad() {
       </div>
   `;
   setupEventListeners();
+}
+
+function populateDefaultProjectsList() {
+  const defaultProjectsList = document.getElementById("default-projects-list");
+  defaultProjectsList.innerHTML = "";
+
+  defaultProjects.forEach((project) => {
+    const createProjectItem = document.createElement("li");
+    createProjectItem.textContent = project.name;
+    createProjectItem.dataset.projectId = project.id;
+    createProjectItem.addEventListener("click", () => {
+      selectProject(project.id);
+    });
+    defaultProjectsList.appendChild(createProjectItem);
+  });
 }
 
 function populateProjectsList() {
@@ -185,6 +205,12 @@ function setupEventListeners() {
 
   //Display projects from local storage
   populateProjectsList();
+  populateDefaultProjectsList();
 }
 
-export { initialLoad, populateProjectsList, populateTasksDisplay };
+export {
+  initialLoad,
+  populateProjectsList,
+  populateDefaultProjectsList,
+  populateTasksDisplay,
+};

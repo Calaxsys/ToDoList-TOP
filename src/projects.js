@@ -1,6 +1,23 @@
 import { getProjects } from "./localStorage";
 
 let projects = getProjects();
+let defaultProjects = [
+  {
+    id: Date.now().toString(),
+    name: "Inbox",
+    tasks: [],
+  },
+  {
+    id: Date.now().toString() + 1,
+    name: "Today",
+    tasks: [],
+  },
+  {
+    id: Date.now().toString() + 2,
+    name: "This Week",
+    tasks: [],
+  },
+];
 
 class Project {
   constructor(id, name, tasks) {
@@ -29,4 +46,10 @@ function cancelProjectForm() {
 }
 
 console.log(projects);
-export { projects, Project, openProjectForm, cancelProjectForm };
+export {
+  defaultProjects,
+  projects,
+  Project,
+  openProjectForm,
+  cancelProjectForm,
+};

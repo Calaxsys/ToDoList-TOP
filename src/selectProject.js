@@ -1,4 +1,4 @@
-import { populateTasksDisplay } from "./UI";
+import { populateTasksDisplay, populateDefaultProjectsList } from "./UI";
 let selectedProjectId = null;
 
 function selectProject(projectId) {
