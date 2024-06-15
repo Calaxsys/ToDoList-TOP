@@ -41,7 +41,7 @@ li {
   border: 2px solid black;
   padding: 1.5rem;
   z-index: 1000;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
 .popup-content {
@@ -86,7 +86,7 @@ li {
   gap: 1rem;
 }
 
-.task-card-left > input[type="radio"] {
+.task-card-left > input[type="checkbox"] {
   width: 18px;
   height: 100%;
   vertical-align: middle;
@@ -192,7 +192,6 @@ li {
 #priority-container > label:hover {
   cursor: pointer;
   color: #1a7fb9;
-  /* font-size: 1.4rem; */
   transition: 0.3s;
 }
 

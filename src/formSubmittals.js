@@ -27,15 +27,30 @@ function handleProjectFormSubmit(e) {
 
 function handleTaskFormSubmit(e) {
   e.preventDefault();
+  //Retrieve values from the form element for the task
   const taskNameInput = document.getElementById("task-name");
   const taskName = taskNameInput.value.trim();
-  if (taskName) {
+
+  const taskDescriptionInput = document.getElementById("task-description");
+  const taskDescription = taskDescriptionInput.value.trim();
+
+  const taskDueDateInput = document.getElementById("due-date");
+  const dueDate = taskDueDateInput.value;
+
+  const taskPriority = document.querySelector(
+    "input[name=priority-level]:checked"
+  ).value;
+
+  if ((taskName, taskDescription, dueDate, taskPriority)) {
     const selectedProjectId = getSelectedProjectId();
     if (selectedProjectId) {
       const project = projects.find((proj) => proj.id === selectedProjectId);
       if (project) {
-        const task = new Task(taskName);
+        const task = new Task(taskName, taskDescription, dueDate);
         task.title = taskName;
+        task.description = taskDescription;
+        task.priority = taskPriority;
+
         project.tasks.push(task);
 
         //Save to local storage

@@ -14,7 +14,7 @@ function initialLoad() {
         <h1 id="home-tab">Home</h1>
         <li id="inbox-tab">Inbox</li>
         <li id="today-tab">Today</li>
-        <li id="important-tab">Important</li>
+        <li id="week-tab">This Week</li>
       </div>
       <div id="projects-section">
         <h1>Projects</h1>
@@ -106,16 +106,35 @@ function populateTasksDisplay() {
         taskCardLeftDisplay.classList.add("task-card-left");
 
         const toggleComplete = document.createElement("input");
-        toggleComplete.type = "radio";
+        toggleComplete.type = "checkbox";
 
         const taskTitle = document.createElement("h3");
         taskTitle.innerText = task.title;
 
-        // const priorityDisplay = document.createElement('span');
-
         taskCardLeftDisplay.appendChild(toggleComplete);
         taskCardLeftDisplay.appendChild(taskTitle);
+
         taskElement.appendChild(taskCardLeftDisplay);
+
+        const rightCardDisplay = document.createElement("div");
+        rightCardDisplay.classList.add("task-card-right");
+
+        const dueDateElement = document.createElement("div");
+        const priorityDisplay = document.createElement("div");
+        const editTaskBtn = document.createElement("button");
+        const deleteTaskBtn = document.createElement("button");
+
+        dueDateElement.textContent = task.date;
+        priorityDisplay.textContent = task.priority;
+        editTaskBtn.textContent = "Edit Task";
+        deleteTaskBtn.textContent = "Delete";
+
+        rightCardDisplay.appendChild(dueDateElement);
+        rightCardDisplay.appendChild(priorityDisplay);
+        rightCardDisplay.appendChild(editTaskBtn);
+        rightCardDisplay.appendChild(deleteTaskBtn);
+        taskElement.appendChild(rightCardDisplay);
+
         taskDisplay.appendChild(taskElement);
       });
     }
